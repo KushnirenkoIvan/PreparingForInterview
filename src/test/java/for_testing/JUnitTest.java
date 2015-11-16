@@ -7,6 +7,8 @@ import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.Timeout;
 
+import static org.junit.Assert.*;
+
 public class JUnitTest {
 
     private Visitor visitor_guest;
@@ -31,19 +33,19 @@ public class JUnitTest {
 
     @Test
     public void testCheckPermissionsCorrect() {
-        Assert.assertTrue(permissionChecker.checkPermissions(visitor_guest, 1));
-        Assert.assertTrue(permissionChecker.checkPermissions(visitor_user, 2));
-        Assert.assertTrue(permissionChecker.checkPermissions(visitor_admin, 4));
+        assertTrue(permissionChecker.checkPermissions(visitor_guest, 1));
+        assertTrue(permissionChecker.checkPermissions(visitor_user, 2));
+        assertTrue(permissionChecker.checkPermissions(visitor_admin, 4));
     }
 
     @Test
     public void testCheckPermissionsIncorrect() {
-        Assert.assertFalse(permissionChecker.checkPermissions(visitor_guest, 4));
-        Assert.assertFalse(permissionChecker.checkPermissions(visitor_guest, 2));
-        Assert.assertFalse(permissionChecker.checkPermissions(visitor_user, 4));
-        Assert.assertFalse(permissionChecker.checkPermissions(visitor_user, 1));
-        Assert.assertFalse(permissionChecker.checkPermissions(visitor_admin, 1));
-        Assert.assertFalse(permissionChecker.checkPermissions(visitor_admin, 2));
+        assertFalse(permissionChecker.checkPermissions(visitor_guest, 4));
+        assertFalse(permissionChecker.checkPermissions(visitor_guest, 2));
+        assertFalse(permissionChecker.checkPermissions(visitor_user, 4));
+        assertFalse(permissionChecker.checkPermissions(visitor_user, 1));
+        assertFalse(permissionChecker.checkPermissions(visitor_admin, 1));
+        assertFalse(permissionChecker.checkPermissions(visitor_admin, 2));
     }
 
     @Test(expected = NullPointerException.class)

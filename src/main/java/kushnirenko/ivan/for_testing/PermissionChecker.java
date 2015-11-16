@@ -9,9 +9,9 @@ public class PermissionChecker {
 
     static final PermissionChecker permissionChecker = new PermissionChecker();
 
-    public final byte ROLE_GUEST = 1;
-    public final byte ROLE_USER = 2;
-    public final byte ROLE_ADMIN = 4;
+    public static final byte ROLE_GUEST = 1;
+    public static final byte ROLE_USER = 2;
+    public static final byte ROLE_ADMIN = 4;
 
     private PermissionChecker() {
         System.out.println("New checker was created.");
@@ -27,5 +27,7 @@ public class PermissionChecker {
         }
         return (visitor.getPermissions() & permission) > 0 ? true : false;
     }
+
+
 
 }

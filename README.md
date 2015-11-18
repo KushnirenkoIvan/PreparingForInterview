@@ -1,3 +1,11 @@
 # PreparingForInterview
 
-This repository contains classes and projects I've create when preparing to interview on Friday 20.11.15.
+Этот репозиторий создан для отображения мей подготовки к собеседованию. 
+Переключаясь между ветками (branches), можно увидеть отработку и повторение технологий, описанных в вакансии: 
+   - branch 'testing_development' - использование JUnit;
+   - branch 'Using_Mockito' - впервые поработал с Mockito и 'тестированием поведения';
+  
+...продолжение следует.
+
+Слияние с мастер веткой выполню по окончании подготовки 20.11.15 до 13-00.
+

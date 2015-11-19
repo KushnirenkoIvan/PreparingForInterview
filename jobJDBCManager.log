@@ -1,0 +1,13 @@
+
+2015-11-19 14:02:32 INFO  JobJDBCManager:32 - DB manager was created.
+2015-11-19 14:02:32 INFO  JobJDBCManager:60 - Job{id='G_Coll', title='Garbage_Collector', minSalary=500, maxSalary=900} successfully added to DB.
+2015-11-19 14:02:32 INFO  JobJDBCManager:69 - Statement closed.
+2015-11-19 14:02:32 INFO  JobJDBCManager:102 - Entity Job{id='FI_MGR', title='Cowboy', minSalary=8200, maxSalary=16000}was read from DB.
+2015-11-19 14:02:32 INFO  JobJDBCManager:109 - Statement closed.
+2015-11-19 14:02:32 INFO  JobJDBCManager:133 - Job{id='FI_MGR', title='Cowboy', minSalary=8200, maxSalary=16000} updated successfully.
+2015-11-19 14:02:32 INFO  JobJDBCManager:142 - Statement closed.
+2015-11-19 14:02:32 INFO  JobJDBCManager:164 - Job{id='G_Coll', title='Garbage_Collector', minSalary=500, maxSalary=900} successfully deleted from DB.
+2015-11-19 14:02:32 INFO  JobJDBCManager:173 - Statement closed.
+2015-11-19 14:02:32 INFO  JobJDBCManager:195 - All fields successfully got from DB.
+2015-11-19 14:02:32 INFO  JobJDBCManager:204 - Statement closed.
+2015-11-19 14:02:32 INFO  JobJDBCManager:219 - Connection to DB successfully closed.

@@ -4,7 +4,10 @@ package kushnirenko.ivan.springJDBC.dao;
 import kushnirenko.ivan.springJDBC.domain.Region;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -14,11 +17,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public class RegionDaoImpl implements RegionDao {
+@SpringBootApplication
+@EnableAutoConfiguration
+public class RegionDaoImpl implements RegionDao, CommandLineRunner {
 
     private static final Logger log = Logger.getLogger(RegionDaoImpl.class);
 
     public RegionDaoImpl() {
+        log.info("Region DAO manager was created.");
     }
 
     @Autowired
@@ -50,8 +56,7 @@ public class RegionDaoImpl implements RegionDao {
                 "from REGIONS where REGION_ID = ?", new RowMapper<Region>() {
             @Override
             public Region mapRow(ResultSet resultSet, int i) throws SQLException {
-                Region region = new Region(resultSet.getLong("REGION_ID"), resultSet.getString("REGION_NAME"));
-                return region;
+                return new Region(resultSet.getLong("REGION_ID"), resultSet.getString("REGION_NAME"));
             }
         }, id);
         if (region != null) {
@@ -94,17 +99,35 @@ public class RegionDaoImpl implements RegionDao {
 
     @Override
     public List<Region> findAll() {
-        return null;
+        List<Region> regions = jdbcTemplate.query("SELECT REGION_ID, REGION_NAME FROM REGIONS", new RowMapper<Region>() {
+                    @Override
+                    public Region mapRow(ResultSet resultSet, int i) throws SQLException {
+                        return new Region(resultSet.getLong("REGION_ID"), resultSet.getString("REGION_NAME"));
+                    }
+                }
+        );
+        log.info("All data from DB got successfully.");
+        return regions;
     }
 
-    public static void main(String[] args) {
-        ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("application-context.xml");
-        RegionDaoImpl regionDao = (RegionDaoImpl) ac.getBean("regionDaoImpl");
-        regionDao.update(new Region(4l, "Middle East"));
-
-//        System.out.println(region);
-//        regionDao.create(new Region(5l, "Australia"));
-//        int i = regionDao.jdbcTemplate.queryForObject("select count(*) from COUNTRIES WHERE REGION_ID = ?", Integer.class, 1);
-//        System.out.println("There are a " + i + " rows in table Countries.");
+    @Override
+    public void run(String... strings) throws Exception {
+        RegionDao regionDao = new RegionDaoImpl();
+        regionDao.create(new Region(6l, "Afrika"));
+        Region regionAfrika = regionDao.read(2l);
+        regionAfrika.setRegionName("veryHotAfrika");
+        regionDao.update(regionAfrika);
+        regionDao.delete(regionAfrika);
+        List<Region> regions = regionDao.findAll();
+        for (Region region : regions) {
+            System.out.println(region);
+        }
+        System.out.println("Connection closed automatically by jdbcTemplate.");
     }
+
+
+    public static void main(String args[]) {
+        SpringApplication.run(RegionDaoImpl.class, args);
+    }
+
 }
